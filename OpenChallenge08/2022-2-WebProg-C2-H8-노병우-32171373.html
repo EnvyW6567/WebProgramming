@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="2022-2-WebProg-C2-H8-노병우-32171373.css" />
+    <title>Document</title>
+  </head>
+  <style>
+    .gamble__container {
+      width: 175px;
+      background-color: blueviolet;
+    }
+    .gamble {
+      width: 50px;
+      height: 75px;
+      font-size: 50px;
+      display: inline-block;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <h1>겜블링 게임</h1>
+    <article>
+      <p>
+        각 숫자를 클릭하면 0에서 2사이의 난수로 바뀝니다.
+        <br />모두 같은 수가 나오면 승리합니다.
+      </p>
+    </article>
+    <hr />
+    <div class="gamble__container">
+      <div id="gamble__01" class="gamble" onclick="roll(this, 0)">0</div>
+      <div id="gamble__02" class="gamble" onclick="roll(this, 1)">0</div>
+      <div id="gamble__03" class="gamble" onclick="roll(this, 2)">0</div>
+    </div>
+    <p id="message"></p>
+  </body>
+  <script>
+    const g1 = document.getElementById("gamble__01");
+    const g2 = document.getElementById("gamble__02");
+    const g3 = document.getElementById("gamble__03");
+    const message = document.getElementById("message");
+    let gamble = [];
+    let is_gamble = [0, 0, 0];
+    let count = 0;
+
+    const win = (gamble) => {
+      if (gamble[0] == gamble[1] && gamble[1] == gamble[2]) {
+        message.innerHTML += `<div class="reload" onclick="location.reload()">Success!(click here to do again)</div>`;
+      } else {
+        message.innerHTML += `<div class="reload" onclick="location.reload()">fail(click here to do again)</div>`;
+      }
+    };
+
+    const roll = (roll, i) => {
+      console.log(i, is_gamble);
+      if (is_gamble[i] == 0) {
+        count += 1;
+        is_gamble[i] = 1;
+        rand = Math.floor(Math.random() * 3);
+        gamble.push(rand);
+        roll.innerHTML = `${rand}`;
+        if (count == 3) win(gamble);
+      }
+    };
+  </script>
+</html>

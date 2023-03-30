@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>나의 단어장 만들기</h1>
+    <hr />
+    <br />
+    <label for="english">영어 : </label>
+    <input type="text" id="english" />
+    <br />
+    <label for="korean">한글 : </label>
+    <input type="text" id="korean" />
+    <br />
+    <br />
+    <input type="button" value="단어 저장" id="save" />
+    <input
+      type="button"
+      value="영단어 검색"
+      id="search"
+      onclick="search_func"
+    />
+    <input type="button" value="단어 삭제" id="delete" onclick="delete_func" />
+    <input
+      type="button"
+      value="전체 보기"
+      id="showall"
+      onclick="showall_func"
+    />
+    <div id="printbox"></div>
+    <script>
+      const get_value = () => {
+        const english = document.getElementById("english").value;
+        const korean = document.getElementById("korean").value;
+        return [english, korean];
+      };
+      // 저장
+      const save_func = () => {
+        value = get_value();
+        const word = window.localStorage.getItem(value[0]);
+        if (word) {
+          if (
+            !confirm(
+              `${value[0]} 은(는) 이미 있는 단어입니다. 수정하시겠습니까?`
+            )
+          ) {
+            return;
+          }
+        }
+        window.localStorage.setItem(value[0], value[1]);
+      };
+      // 검색
+      const search_func = () => {
+        value = get_value();
+        const word = window.localStorage.getItem(value[0]);
+        if (!word) {
+          alert(`${value[0]}는 없는 단어 입니다.`);
+          retrun;
+        }
+        print_box.innerHTML += `${value[0]} , ${word} <br/>`;
+      };
+      //삭제
+      const delete_func = () => {
+        value = get_value();
+        const word = window.localStorage.getItem(value[0]);
+        if (!word) {
+          alert(`${value[0]}는 없는 단어 입니다.`);
+          return;
+        }
+        window.localStorage.removeItem(value[0]);
+      };
+      //전체 보기
+      const showall_func = () => {
+        window.open("./showall.html");
+      };
+
+      const print_box = document.getElementById("printbox");
+      const save_btn = document.getElementById("save");
+      const search_btn = document.getElementById("search");
+      const delete_btn = document.getElementById("delete");
+      const showall_btn = document.getElementById("showall");
+      save_btn.addEventListener("click", save_func);
+      search_btn.addEventListener("click", search_func);
+      delete_btn.addEventListener("click", delete_func);
+      showall_btn.addEventListener("click", showall_func);
+    </script>
+  </body>
+</html>

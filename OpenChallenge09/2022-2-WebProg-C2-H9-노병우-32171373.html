@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    td {
+      width: 50px;
+      height: 50px;
+      border: 1px solid black;
+    }
+    img {
+      width: 45px;
+      height: 45px;
+    }
+  </style>
+  <body>
+    <h1>마우스 클릭 연습</h1>
+    <hr />
+    <table id="table"></table>
+  </body>
+  <script>
+    for (i = 0; i < 10; i++) {
+      table.innerHTML += `<tr>
+        <td><img src=""  onclick="tdEvent(this)" onerror="this.style.display='none'"></td>
+        <td><img src=""  onclick="tdEvent(this)" onerror="this.style.display='none'"></td>
+        <td><img src=""  onclick="tdEvent(this)" onerror="this.style.display='none'"></td>
+        <td><img src=""  onclick="tdEvent(this)" onerror="this.style.display='none'"></td>
+        <td><img src=""  onclick="tdEvent(this)" onerror="this.style.display='none'"></td>
+        <td><img src=""  onclick="tdEvent(this)" onerror="this.style.display='none'"></td>
+        <td><img src=""  onclick="tdEvent(this)" onerror="this.style.display='none'"></td>
+        <td><img src=""  onclick="tdEvent(this)" onerror="this.style.display='none'"></td>
+        <td><img src=""  onclick="tdEvent(this)" onerror="this.style.display='none'"></td>
+        <td><img src=""  onclick="tdEvent(this)" onerror="this.style.display='none'"></td>
+        </tr>`;
+    }
+
+    const td = document.getElementsByTagName("td");
+    const images = document.getElementsByTagName("img");
+    let ran = Math.floor(Math.random() * 100);
+    images[ran].src = "https://cdn-icons-png.flaticon.com/512/3802/3802054.png";
+
+    const tdEvent = (e) => {
+      e.src = "";
+      ran = Math.floor(Math.random() * 100);
+      console.log(ran);
+      images[ran].src =
+        "https://cdn-icons-png.flaticon.com/512/3802/3802054.png";
+      images[ran].style.display = "block";
+      console.log(images[ran]);
+    };
+  </script>
+</html>
